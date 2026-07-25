@@ -1,3 +1,4 @@
+# 第二次练习git
 class goods:
     def __init__(self,name,price,count):
         self.name=name
