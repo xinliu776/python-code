@@ -3,7 +3,7 @@ from openai import OpenAI
 import json
 from tool_registry import tool_map
 from executor import execute_tool
-
+import mcp
 
 client = OpenAI(
     api_key="sk-d1f41205cf5e4c83b6aaa897d159c87c",
