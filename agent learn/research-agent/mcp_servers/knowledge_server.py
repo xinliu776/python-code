@@ -1,10 +1,7 @@
-from sentence_transformers import SentenceTransformer
-from sentence_transformers.util import cos_sim
+from mcp.server import MCPServer
 import chromadb
 from chromadb.utils import embedding_functions
-model = SentenceTransformer(
-    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-)
+
 
 query = "AI模型怎样连接外部工具？"
 
@@ -26,7 +23,13 @@ collection = client.get_or_create_collection(
 if collection.count()==0:
    collection.add(ids=["1","2","3"],documents=documents)
 
-def retrieve(query,n_results=2, threshold=0.5):
+mcp=MCPServer("calculator")
+@mcp.tool()
+def retrieve(
+    query: str,
+    n_results: int = 2,
+    threshold: float = 0.5
+) -> list[str]:
 
     result=collection.query(
         query_texts=[query],
@@ -40,5 +43,3 @@ def retrieve(query,n_results=2, threshold=0.5):
         if distance<threshold:
             best_result.append(document)
     return best_result
-
-print(retrieve("什么情况"))
