@@ -1,0 +1,22 @@
+services:
+
+  agent-harness:
+
+    build:
+      context: .
+
+    container_name:
+      agent-harness-runtime
+
+    env_file:
+      - .env
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./data:/app/data
+      - ./workspace:/app/workspace
+
+    restart:
+      unless-stopped

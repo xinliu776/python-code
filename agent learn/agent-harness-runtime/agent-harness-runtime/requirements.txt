@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+openai
+pydantic
+pydantic-settings
+python-dotenv
+mcp>=2,<3
+pytest
+httpx
